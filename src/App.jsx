@@ -422,7 +422,7 @@ const Details = [
   },
   {
     id: 101,
-    img_url: "public/30337e5dcc7ffd8ae555a0d620abe3562b1e73bf (2).jpg",
+    img_url: "30337e5dcc7ffd8ae555a0d620abe3562b1e73bf (2).jpg",
     name: "Purijaganth",
     casts: "30 tracks",
     items: [
@@ -1210,7 +1210,7 @@ const Details = [
   },
   {
     id: 103,
-    img_url: "public/79a584097252a30afb87ec889046e3b30ef29d10.jpg",
+    img_url: "79a584097252a30afb87ec889046e3b30ef29d10.jpg",
     name: "Call her daddy",
     casts: "50 tracks",
     items: [
