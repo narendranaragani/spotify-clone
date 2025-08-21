@@ -63,7 +63,7 @@ const LoginForm = () => {
       <div>
         <div className='p-2'>
           <div className='md:mt-6 mt-3'>
-            <img src="public/music.png" className='w-35 mx-auto'/>
+            <img src="music.png" className='w-35 mx-auto'/>
             <h1 className='text-center font-semibold text-white text-2xl'>Spotify Remix</h1>
             <div className='flex flex-col md:mt-6 mt-3'>
                 <label className='font-semibold text-white pl-3'>USERNAME</label>
