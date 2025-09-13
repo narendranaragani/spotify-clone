@@ -6,9 +6,11 @@ const FirstHome = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    console.log("Button clicked, navigating to /login");
     navigate("/login", { replace: true });
   };
 
+  
   return (
     <div className="relative h-screen w-full bg-black overflow-hidden">
       <video
