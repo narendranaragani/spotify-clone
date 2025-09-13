@@ -2,31 +2,14 @@ import React, { useState } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const LoginForm = () => {
+const RegisterForm = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showSubmitError, setShowSubmiterror] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); // New state for errors
 
   const navigate = useNavigate();
-
-  const onChangeEmailHandler = (event) => {
-    setEmail(event.target.value);
-  };
-  const onChangePassHandler = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const onSuccessEvent = (jwtToken) => {
-    Cookies.set("jwt_token", jwtToken, { expires: 30 });
-    navigate("/", { replace: true });
-  };
-
-  const onFailureEvent = (error) => {
-    setErrorMessage(error);
-    setShowSubmiterror(true);
-  };
 
   const token = Cookies.get("jwt_token");
   if (token !== undefined) {
@@ -35,44 +18,71 @@ const LoginForm = () => {
 
   const onSubmitEvent = async (event) => {
     event.preventDefault();
-    const userDetails = { email, password };
-    const url = "http://localhost:7000/api/login";
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userDetails),
-    };
-    const response = await fetch(url, options);
-    const data = await response.json();
+    setErrorMessage(""); // reset error on submit
 
-    if (response.ok === true) {
-      onSuccessEvent(data.token);
-    } else {
-      onFailureEvent(data.message);
+    const userDetails = { username, email, password };
+    const url = "http://localhost:7000/api/register";
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userDetails),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        navigate("/login", { replace: true });
+        console.log("User registered successfully");
+      } else {
+        // Show backend error message (username/email exists)
+        setErrorMessage(data.message || "Registration failed");
+      }
+    } catch (error) {
+      setErrorMessage("Something went wrong. Please try again.");
+      console.error(error);
     }
   };
 
   return (
-    <div className="bg-[url(/Group%20138.png)] bg-cover bg-center h-screen w-full flex justify-center items-center">
+    <div className="bg-[url(https://i.pinimg.com/1200x/7e/fc/d9/7efcd9c359dd0a12699c94ba4c71a83c.jpg)] bg-cover bg-center h-screen w-full flex justify-center items-center">
       <form
-        className="bg-[#181818] md:w-[450px] md:h-[445px] w-[296px] h-[430px] rounded-md opacity-90"
+        className="bg-[#181818] md:w-[450px] md:h-[540px] w-[296px] h-[410px] rounded-md opacity-90"
         onSubmit={onSubmitEvent}
       >
         <div className="p-2">
           <div className="md:mt-6 mt-3">
             <img src="Group.png" className="w-35 mx-auto mb-2" />
             <h1 className="text-center font-semibold text-white text-2xl">
-              Spotify Remix
+              Register
             </h1>
 
-            <div className="flex flex-col">
+            {errorMessage && (
+              <p className="text-center text-red-500 font-semibold mb-2">
+                {errorMessage}
+              </p>
+            )}
+
+            <div className="flex flex-col md:mt-6 mt-3">
+              <label className="font-semibold text-white pl-3">USERNAME</label>
+              <input
+                placeholder="ex:username@123"
+                className="md:w-[408px] w-[250px] bg-[#D9D9D9] px-3 py-2 rounded-md m-3 outline-none font-roboto font-semibold"
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+                type="text"
+              />
+            </div>
+
+            <div className="flex flex-col ">
               <label className="font-semibold text-white pl-3">EMAIL</label>
               <input
                 placeholder="example@email.com"
                 className="md:w-[408px] w-[250px] bg-[#D9D9D9] px-3 py-2 rounded-md m-3 outline-none font-roboto font-semibold"
-                onChange={onChangeEmailHandler}
+                onChange={(e) => setEmail(e.target.value)}
                 value={email}
-                type="text"
+                type="email"
               />
             </div>
 
@@ -81,7 +91,7 @@ const LoginForm = () => {
               <input
                 placeholder="Enter your password"
                 className="md:w-[408px] w-[250px] bg-[#D9D9D9] px-3 py-2 rounded-md m-3 outline-none pr-10"
-                onChange={onChangePassHandler}
+                onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 type={showPassword ? "text" : "password"}
               />
@@ -113,19 +123,14 @@ const LoginForm = () => {
               type="submit"
               className="md:w-[408px] w-[150px] bg-green-500 px-3 py-2 rounded-md m-3 outline-none font-semibold text-black cursor-pointer"
             >
-              Login
+              Register
             </button>
           </div>
 
-          {showSubmitError && (
-            <p className="md:ml-3 font-semibold text-red-500 md:pl-0 pl-3">
-              *{errorMessage}
-            </p>
-          )}
-          <p className="text-center text-white mt-4">
-            Don’t have an account?{" "}
-            <Link to="/register" className="text-green-400 underline">
-              Register
+          <p className="text-center text-white mt-2">
+            Already have an account?{" "}
+            <Link to="/login" className="text-green-400 hover:underline">
+              Login
             </Link>
           </p>
         </div>
@@ -134,4 +139,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

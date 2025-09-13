@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { SearchContext } from "../searchContext";
 import Navbar from "../Navbar";
 
 
 const CategoryDetails = () => {
   const { CategoryplaylistId } = useParams();
   const [Categoryplaylist, setCategoryPlaylist] = useState(null);
+   const { searchSong } = useContext(SearchContext);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -47,6 +49,9 @@ const CategoryDetails = () => {
       </div>
     );
   }
+  const filteredPlaylists = Categoryplaylist.playlists.items.filter((pl) =>
+    pl.name.toLowerCase().includes(searchSong.toLowerCase())
+  );
 
   return (
     <>
@@ -62,7 +67,7 @@ const CategoryDetails = () => {
         </div>
         <h1 className="text-3xl font-bold p-3">Playlists</h1>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-6">
-          {Categoryplaylist.playlists.items.map((pl) => (
+          {filteredPlaylists.map((pl) => (
             <Link
               to={`/playlist/${pl.id}`}
               key={pl.id}

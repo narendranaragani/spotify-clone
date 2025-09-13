@@ -13,8 +13,6 @@ const Home = () => {
   const [newReleases,setnewReleases] = useState([])
   const [isLoading, setLoading] = useState(true);
   
-  
-
   useEffect(() => {
     const fetchPlaylists = async () => {
       const url = "https://apis2.ccbp.in/spotify-clone/featured-playlists";
@@ -64,7 +62,6 @@ const Home = () => {
     <FeturesPlayList playlists={playlists} isLoading={isLoading}/>
     <CategoryPlayList categoryLists={categoryLists} />
     <NewReleases newReleases={newReleases}/> 
-
     </div>}
     </>
   );

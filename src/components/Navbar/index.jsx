@@ -1,22 +1,36 @@
-import React from 'react'
+import { useContext, useState,useEffect } from "react";
 import { Link, useNavigate } from 'react-router'
+import { SearchContext } from '../searchContext';
+
+
 import Cookies from 'js-cookie';
 
-const Navbar = () => {
-
+const Navbar = () => {  
+ const { setSearchSong } = useContext(SearchContext);
+ const [inputValue, setInputValue] = useState("");
+  
   const navigate = useNavigate();
   const onClickLogout = ()=>{
     Cookies.remove('jwt_token')
     navigate('/login',{replace: true})
   }
+useEffect(() => {
+  const debounceTimeout = setTimeout(() => {
+    setSearchSong(inputValue);
+  }, 300);
+
+  return () => clearTimeout(debounceTimeout);
+}, [inputValue]);
 
   return (
     <div>
       <nav className="bg-[black] h-18 fixed w-full flex justify-between items-center p-3 z-100">
         <div className="flex justify-center items-center gap-8">
-          <img src="/music.png" className="w-25 md:w-30" />
+          <Link to="/">
+            <img src="/public/Group.png" className="w-25 md:w-30" />
+          </Link>
           <div className="hidden md:flex">
-            <Link to="/">
+            <Link to="/home">
               <div className="w-12 h-12 bg-[#181818] rounded-3xl mr-5 flex justify-center items-center cursor-pointer hover:bg-[#242424]">
                 <img
                   width="30"
@@ -40,6 +54,8 @@ const Navbar = () => {
                 />
               </svg>
               <input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
                 className="w-90 h-10 text-gray-200 hover:bg-[#333333] font-semibold bg-[#181818] px-3 py-3 rounded-3xl pl-10"
                 type="text"
                 placeholder="What do you want to play?"
@@ -49,16 +65,14 @@ const Navbar = () => {
         </div>
         <div className="flex justify-around items-center p-4">
           <div className=" flex justify-center items-center gap-2">
-            <button className="md:mr-5  bg-[#242424] hover:bg-[#30A669] hover:text-[black] cursor-pointer text-[#969696] font-semibold md:w-15 w-12 h-8 md:text-md text-sm rounded-2xl hidden md:block">
-              All
-            </button>
-            <Link to="/playlist">
-              <button className="md:mr-5  bg-[#242424] hover:text-[white] cursor-pointer text-[#969696] font-semibold md:w-18 h-8 w-15 md:text-md text-sm rounded-2xl border-2 border-violet-500/50 hidden md:block">
-                Music
+            <Link to="/home">
+              <button className="md:mr-5  bg-[#242424] hover:bg-[#30A669] hover:text-[black] cursor-pointer text-[#969696] font-semibold md:w-15 w-12 h-8 md:text-md text-sm rounded-2xl hidden md:block">
+                All
               </button>
             </Link>
+            
           </div>
-          <Link to="/">
+          <Link to="/home">
             <div className="w-12 h-12 block md:hidden bg-[#181818] rounded-3xl mr-5 flex justify-center items-center cursor-pointer hover:bg-[#242424]">
               <img
                 width="30"

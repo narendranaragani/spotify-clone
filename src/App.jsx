@@ -1,4 +1,3 @@
-import React from "react";
 import Home from "./components/Home";
 import LoginForm from "./components/LoginPopUp";
 import PodcastDetails from "./components/podcasts";
@@ -8,6 +7,9 @@ import PlaylistDetails from "./components/songs";
 import CategoryDetails from "./components/categoriesPlayList/categorysongs";
 import NewreleasesDetails from "./components/NewReaslesPlayList/newReleases";
 import PodcastPage from "./components/podcasts/podcasts";
+import RegisterForm from "./components/LoginPopUp/registerForm";
+import SearchSongs from "./components/searchContext";
+import FirstHome from "./components/firstHome.jsx"
 
 
 const Details = [
@@ -15,7 +17,7 @@ const Details = [
     id: 102,
     img_url: "https://i.scdn.co/image/ab6765630000ba8af1673ed0ad264b0914cf3f7d",
     name: "BhagavadGita",
-    casts: "20 tracks",
+    casts: "10 tracks",
     items: [
       {
         audio_preview_url:
@@ -422,9 +424,10 @@ const Details = [
   },
   {
     id: 101,
-    img_url: "public/30337e5dcc7ffd8ae555a0d620abe3562b1e73bf (2).jpg",
+    img_url:
+      "https://is1-ssl.mzstatic.com/image/thumb/Podcasts114/v4/1b/13/c6/1b13c624-7584-4814-e0ee-860c4bc8ffe3/mza_12955823831825697714.jpg/250x250bb.jpg",
     name: "Purijaganth",
-    casts: "30 tracks",
+    casts: "20 tracks",
     items: [
       {
         audio_preview_url:
@@ -1210,9 +1213,9 @@ const Details = [
   },
   {
     id: 103,
-    img_url: "public/79a584097252a30afb87ec889046e3b30ef29d10.jpg",
+    img_url: "/79a584097252a30afb87ec889046e3b30ef29d10.jpg",
     name: "Call her daddy",
-    casts: "50 tracks",
+    casts: "10 tracks",
     items: [
       {
         audio_preview_url:
@@ -1258,8 +1261,7 @@ const Details = [
       {
         audio_preview_url:
           "https://podz-content.spotifycdn.com/audio/clips/06iMTlb71CYehgnetYzuK8/clip_1513000_1578320.mp3",
-        description:
-          'This week, Father Cooper sits down with Demi Lovato.',
+        description: "This week, Father Cooper sits down with Demi Lovato.",
         duration_ms: 2666475,
         explicit: true,
         external_urls: {
@@ -1340,8 +1342,7 @@ const Details = [
       {
         audio_preview_url:
           "https://podz-content.spotifycdn.com/audio/clips/3BwJp6t4Vv1wN7waLFf0yH/clip_214000_279920.mp3",
-        description:
-          "This week, Alex breaks down how to handle texting.",
+        description: "This week, Alex breaks down how to handle texting.",
         duration_ms: 2945071,
         explicit: true,
         external_urls: {
@@ -1422,8 +1423,7 @@ const Details = [
       {
         audio_preview_url:
           "https://podz-content.spotifycdn.com/audio/clips/4kKb69AdtG8X2RU7q3mZvw/clip_567000_627720.mp3",
-        description:
-          "Gwyneth Paltrow joins Call Her Daddy to reflect.",
+        description: "Gwyneth Paltrow joins Call Her Daddy to reflect.",
         duration_ms: 3236832,
         explicit: true,
         external_urls: {
@@ -1631,47 +1631,57 @@ const Details = [
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<LoginForm />}></Route>
-
-          <Route
-            path="/"
-            element={
-              <ProtectRoute>
-                <Home />
-              </ProtectRoute>
-            }
-          ></Route>
-          <Route
-            path="/podcasts"
-            element={
-              <ProtectRoute>
-                <PodcastDetails Details={Details} />
-              </ProtectRoute>
-            }
-          ></Route>
-          <Route
-            path="/podcast"
-            element={
-              <ProtectRoute>
-                <PodcastPage />
-              </ProtectRoute>
-            }
-          ></Route>
-          <Route path="/playlist/:playlistId" element={<PlaylistDetails />} />
-          <Route />
-          <Route
-            path="/categorylist/:CategoryplaylistId"
-            element={<CategoryDetails />}
-          />
-          <Route />
-          <Route
-            path="/newreleases/:NewReleaseplaylistId"
-            element={<NewreleasesDetails />}
-          />
-        </Routes>
-      </BrowserRouter>
+      <SearchSongs>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<LoginForm />}></Route>
+            <Route path="/register" element={<RegisterForm />}></Route>
+            <Route
+              path="/"
+              element={
+                <ProtectRoute>
+                  <FirstHome />
+                </ProtectRoute>
+              }
+            ></Route>
+            <Route
+              path="/home"
+              element={
+                <ProtectRoute>
+                  <Home />
+                </ProtectRoute>
+              }
+            ></Route>
+            <Route
+              path="/podcasts"
+              element={
+                <ProtectRoute>
+                  <PodcastDetails Details={Details} />
+                </ProtectRoute>
+              }
+            ></Route>
+            <Route
+              path="/podcast"
+              element={
+                <ProtectRoute>
+                  <PodcastPage />
+                </ProtectRoute>
+              }
+            ></Route>
+            <Route path="/playlist/:playlistId" element={<PlaylistDetails />} />
+            <Route />
+            <Route
+              path="/categorylist/:CategoryplaylistId"
+              element={<CategoryDetails />}
+            />
+            <Route />
+            <Route
+              path="/newreleases/:NewReleaseplaylistId"
+              element={<NewreleasesDetails />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </SearchSongs>
     </>
   );
 }
