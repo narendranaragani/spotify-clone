@@ -1,6 +1,6 @@
 import React from "react";
 // import { useNavigate } from "react-router";
-import {Link} from "react"
+import { Link } from 'react-router-dom';
 
 const FirstHome = () => {
   // const navigate = useNavigate();
