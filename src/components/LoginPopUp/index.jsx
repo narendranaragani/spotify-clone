@@ -36,7 +36,7 @@ const LoginForm = () => {
   const onSubmitEvent = async (event) => {
     event.preventDefault();
     const userDetails = { email, password };
-    const url = "http://localhost:7000/api/login";
+    const url = "https://spotify-clone-1-96wb.onrender.com/api/login";
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
