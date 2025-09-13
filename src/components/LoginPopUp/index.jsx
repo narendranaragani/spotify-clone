@@ -20,7 +20,7 @@ const LoginForm = () => {
 
   const onSuccessEvent = (jwtToken) => {
     Cookies.set("jwt_token", jwtToken, { expires: 30 });
-    navigate("/", { replace: true });
+    navigate("/home", { replace: true });
   };
 
   const onFailureEvent = (error) => {
