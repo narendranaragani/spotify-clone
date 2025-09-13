@@ -21,7 +21,7 @@ const RegisterForm = () => {
     setErrorMessage(""); // reset error on submit
 
     const userDetails = { username, email, password };
-    const url = "http://localhost:7000/api/register";
+    const url = "https://spotify-clone-1-96wb.onrender.com/api/register";
 
     try {
       const response = await fetch(url, {
