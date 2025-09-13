@@ -1639,9 +1639,7 @@ function App() {
             <Route
               path="/"
               element={
-                <ProtectRoute>
                   <FirstHome />
-                </ProtectRoute>
               }
             ></Route>
             <Route
