@@ -145,7 +145,7 @@ const PlaylistDetails = () => {
                         height="25"
                         src="https://img.icons8.com/ios-glyphs/30/1DB954/pause--v1.png"
                         alt="pause"
-                        className="absolute opacity-100 ml-40 sm:ml-20"
+                        className="absolute opacity-100 ml-20 md:ml-40"
                         onClick={() => setCurrentSong(null)}
                       />
                     ) : (
@@ -154,7 +154,7 @@ const PlaylistDetails = () => {
                         height="25"
                         src="https://img.icons8.com/ios-glyphs/30/1DB954/play--v1.png"
                         alt="play"
-                        className="absolute opacity-0 ml-40 sm:ml-20 group-hover:opacity-100 transition"
+                        className="absolute opacity-0 ml-20 md:ml-40 group-hover:opacity-100 transition"
                         onClick={() => playSongs(track)}
                       />
                     )}
