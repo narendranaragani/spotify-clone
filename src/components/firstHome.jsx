@@ -6,7 +6,7 @@ const FirstHome = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/home", { replace: true });
+    navigate("/login", { replace: true });
   };
 
   
