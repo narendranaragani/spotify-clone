@@ -1,12 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
+import {Link} from "react"
 
 const FirstHome = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate("/login", { replace: true });
-  };
+  // const handleClick = () => {
+  //   navigate("/login", { replace: true });
+  // };
 
   return (
     <div className="relative h-screen w-full bg-black overflow-hidden">
@@ -33,12 +34,13 @@ const FirstHome = () => {
               Your Home.
             </h1>
 
-            <button
-              onClick={handleClick}
+            <Link to="/login"><button
+              
               className="mt-8 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition"
             >
               Get Started
             </button>
+              </Link>
           </div>
           <div className="mt-10 md:mt-0">
             <img
