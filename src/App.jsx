@@ -1636,11 +1636,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginForm />}></Route>
             <Route path="/register" element={<RegisterForm />}></Route>
-            <Route path="/" element={
-              <ProtectRoute>
-                <FirstHome/>
-              </ProtectRoute>
-            }></Route>
+            <Route path="/" element={<FirstHome/>}></Route>
             <Route
               path="/home"
               element={
