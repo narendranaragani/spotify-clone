@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const FirstHome = () => {
   const navigate = useNavigate();
-
   return (
     <div className="relative h-screen w-full bg-black overflow-hidden">
       <video
