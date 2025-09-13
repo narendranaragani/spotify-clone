@@ -5,11 +5,6 @@ import { useNavigate } from "react-router-dom";
 const FirstHome = () => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate("/login", { replace: true });
-  };
-
-  
   return (
     <div className="relative h-screen w-full bg-black overflow-hidden">
       <video
@@ -36,7 +31,7 @@ const FirstHome = () => {
             </h1>
 
             <button
-              onClick={handleClick}
+              onClick={() => navigate("/login")}
               className="mt-8 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition"
             >
               Get Started
