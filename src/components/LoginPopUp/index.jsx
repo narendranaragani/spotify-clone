@@ -30,7 +30,7 @@ const LoginForm = () => {
 
   const token = Cookies.get("jwt_token");
   if (token !== undefined) {
-    return <Navigate to="/login" { replace: true }/>;
+    return <Navigate to="/home"/>;
   }
 
   const onSubmitEvent = async (event) => {
