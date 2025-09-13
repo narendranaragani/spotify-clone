@@ -27,7 +27,7 @@ useEffect(() => {
       <nav className="bg-[black] h-18 fixed w-full flex justify-between items-center p-3 z-100">
         <div className="flex justify-center items-center gap-8">
           <Link to="/">
-            <img src="/public/Group.png" className="w-25 md:w-30" />
+            <img src="Group.png" className="w-25 md:w-30" />
           </Link>
           <div className="hidden md:flex">
             <Link to="/home">
