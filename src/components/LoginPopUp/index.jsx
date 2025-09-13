@@ -20,7 +20,7 @@ const LoginForm = () => {
 
   const onSuccessEvent = (jwtToken) => {
     Cookies.set("jwt_token", jwtToken, { expires: 30 });
-    navigate("/", { replace: true });
+    navigate("/home", { replace: true });
   };
 
   const onFailureEvent = (error) => {
@@ -30,7 +30,7 @@ const LoginForm = () => {
 
   const token = Cookies.get("jwt_token");
   if (token !== undefined) {
-    return <Navigate to="/"/>;
+    return <Navigate to="/home"/>;
   }
 
   const onSubmitEvent = async (event) => {
