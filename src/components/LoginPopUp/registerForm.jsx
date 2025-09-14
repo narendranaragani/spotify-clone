@@ -7,7 +7,9 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); // New state for errors
+  const [errorMessage, setErrorMessage] = useState(""); 
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -18,7 +20,8 @@ const RegisterForm = () => {
 
   const onSubmitEvent = async (event) => {
     event.preventDefault();
-    setErrorMessage(""); // reset error on submit
+    setErrorMessage("");
+    setIsLoading(true);
 
     const userDetails = { username, email, password };
     const url = "https://spotify-clone-1-96wb.onrender.com/api/register";
@@ -43,6 +46,7 @@ const RegisterForm = () => {
       setErrorMessage("Something went wrong. Please try again.");
       console.error(error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -121,9 +125,12 @@ const RegisterForm = () => {
           <div className="md:ml-0 ml-10">
             <button
               type="submit"
-              className="md:w-[408px] w-[150px] bg-green-500 px-3 py-2 rounded-md m-3 outline-none font-semibold text-black cursor-pointer"
+              disabled={isLoading}
+              className={`md:w-[408px] w-[150px] bg-green-500 px-3 py-2 rounded-md m-3 outline-none font-semibold text-black cursor-pointer ${
+                isLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
-              Register
+              {isLoading ? "Registering..." : "Register"}
             </button>
           </div>
 
