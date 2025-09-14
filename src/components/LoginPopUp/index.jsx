@@ -8,6 +8,7 @@ const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showSubmitError, setShowSubmiterror] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ const LoginForm = () => {
   const onFailureEvent = (error) => {
     setErrorMessage(error);
     setShowSubmiterror(true);
+    setIsLoading(false);
   };
 
   const token = Cookies.get("jwt_token");
@@ -35,6 +37,7 @@ const LoginForm = () => {
 
   const onSubmitEvent = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     const userDetails = { email, password };
     const url = "https://spotify-clone-1-96wb.onrender.com/api/login";
     const options = {
@@ -42,13 +45,17 @@ const LoginForm = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userDetails),
     };
-    const response = await fetch(url, options);
-    const data = await response.json();
+   try {
+      const response = await fetch(url, options);
+      const data = await response.json();
 
-    if (response.ok === true) {
-      onSuccessEvent(data.token);
-    } else {
-      onFailureEvent(data.message);
+      if (response.ok === true) {
+        onSuccessEvent(data.token);
+      } else {
+        onFailureEvent(data.message);
+      }
+    } catch (error) {
+      onFailureEvent("Something went wrong. Please try again.",error);
     }
   };
 
@@ -111,9 +118,12 @@ const LoginForm = () => {
           <div className="md:ml-0 ml-10">
             <button
               type="submit"
-              className="md:w-[408px] w-[150px] bg-green-500 px-3 py-2 rounded-md m-3 outline-none font-semibold text-black cursor-pointer"
+              disabled={isLoading}
+              className={`md:w-[408px] w-[150px] bg-green-500 px-3 py-2 rounded-md m-3 outline-none font-semibold text-black cursor-pointer flex justify-center items-center ${
+                isLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
-              Login
+              {isLoading ? "Logging in..." : "Login"}
             </button>
           </div>
 
