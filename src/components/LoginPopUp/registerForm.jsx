@@ -93,7 +93,7 @@ const RegisterForm = () => {
             <div className="flex flex-col relative">
               <label className="font-semibold text-white pl-3">PASSWORD</label>
               <input
-                placeholder="Enter your password"
+                placeholder="Create your password"
                 className="md:w-[408px] w-[250px] bg-[#D9D9D9] px-3 py-2 rounded-md m-3 outline-none pr-10"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
